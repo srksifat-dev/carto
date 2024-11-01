@@ -1,4 +1,9 @@
+import 'package:carto/features/shop/data/data_sources/remote/shop_data_source.dart';
+import 'package:carto/features/shop/data/repositories/shop_repository_impl.dart';
+import 'package:carto/features/shop/domain/repositories/shop_repository.dart';
+import 'package:carto/features/shop/presentation/cubits/shop_cubit.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:dio/dio.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get_it/get_it.dart';
 

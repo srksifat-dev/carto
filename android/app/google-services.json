@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "131968177952",
+    "project_id": "carto-ec922",
+    "storage_bucket": "carto-ec922.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:131968177952:android:28e693da03069983f72945",
+        "android_client_info": {
+          "package_name": "com.srksifat.carto"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAlzJfMj6gCoiH68V70WJejoTJ0r67h0h8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

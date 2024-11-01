@@ -28,7 +28,7 @@ class AuthRepositoryImpl implements AuthRepository {
           email, password, name, avatarUrl);
       return DataSuccess(user);
     } on FirebaseAuthException catch (error) {
-      return DataFailed(error);
+      return DataFailed(error.toString());
     }
   }
 
@@ -38,7 +38,7 @@ class AuthRepositoryImpl implements AuthRepository {
       final user = await firebaseAuthDataSource.login(email, password);
       return DataSuccess(user);
     } on FirebaseAuthException catch (error) {
-      return DataFailed(error);
+      return DataFailed(error.toString());
     }
   }
 
@@ -56,7 +56,7 @@ class AuthRepositoryImpl implements AuthRepository {
       final user = await firebaseAuthDataSource.getCurrentUser();
       return DataSuccess(user);
     } on FirebaseAuthException catch (error) {
-      return DataFailed(error);
+      return DataFailed(error.toString());
     }
   }
 }
