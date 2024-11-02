@@ -28,7 +28,7 @@ class _RegisterContentState extends State<RegisterContent> {
               ),
 
               // Sign Up Form
-              SignUpForm(),
+              const SignUpForm(),
               const SizedBox(height: 16),
 
               // Already have account
@@ -43,7 +43,7 @@ class _RegisterContentState extends State<RegisterContent> {
                     children: <TextSpan>[
                       TextSpan(
                         text: "Sign In",
-                        style: const TextStyle(color: Color(0xFF22A45D)),
+                        style: TextStyle(color: Theme.of(context).colorScheme.primary),
                         recognizer: TapGestureRecognizer()
                           ..onTap = widget.goLoginScreen,
                       ),
@@ -85,7 +85,7 @@ class WelcomeText extends StatelessWidget {
               .copyWith(fontWeight: FontWeight.w600),
         ),
         const SizedBox(height: 16 / 2),
-        Text(text, style: TextStyle(color: Color(0xFF868686))),
+        Text(text, style: const TextStyle(color: Color(0xFF868686))),
         const SizedBox(height: 24),
       ],
     );
@@ -180,10 +180,10 @@ class _SignUpFormState extends State<SignUpForm> {
             onSaved: (value) {},
             decoration: InputDecoration(
               hintText: "Password",
-              border: UnderlineInputBorder(
+              border: const UnderlineInputBorder(
                 borderSide: BorderSide(color: Color(0xFFF3F2F2)),
               ),
-              enabledBorder: UnderlineInputBorder(
+              enabledBorder: const UnderlineInputBorder(
                 borderSide: BorderSide(color: Color(0xFFF3F2F2)),
               ),
               suffixIcon: GestureDetector(
@@ -198,7 +198,7 @@ class _SignUpFormState extends State<SignUpForm> {
               ),
             ),
           ),
-          SizedBox(height: 16,),
+          const SizedBox(height: 16,),
 
           // Sign Up Button
           ElevatedButton(
@@ -206,7 +206,7 @@ class _SignUpFormState extends State<SignUpForm> {
               register();
             },
             style: ElevatedButton.styleFrom(
-              backgroundColor: const Color(0xFF22A45D),
+              backgroundColor: Theme.of(context).colorScheme.primary,
               foregroundColor: Colors.white,
               minimumSize: const Size(double.infinity, 40),
               shape: RoundedRectangleBorder(

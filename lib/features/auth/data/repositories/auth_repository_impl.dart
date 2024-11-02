@@ -3,18 +3,12 @@ import 'package:carto/features/auth/domain/entities/user_entity.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 import '../data_sources/firebase_auth_data_source.dart';
-import '../models/user_model.dart';
 import '../../domain/repositories/auth_repository.dart';
 
 class AuthRepositoryImpl implements AuthRepository {
   final FirebaseAuthDataSource firebaseAuthDataSource;
 
   AuthRepositoryImpl(this.firebaseAuthDataSource);
-
-  // @override
-  // Future<DataState<UserModel>?> getCurrentUser() async {
-  //   return firebaseAuthDataSource.getCurrentUser();
-  // }
 
   @override
   Future<DataState<UserEntity?>> register({

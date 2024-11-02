@@ -1,8 +1,8 @@
-import 'package:carto/features/shop/domain/entities/product_entity.dart';
+import 'package:carto/features/shop/data/models/product_model.dart';
 
 abstract class ShopState{
-  final List<ProductEntity>? products;
-  final ProductEntity? product;
+  final List<ProductModel>? products;
+  final ProductModel? product;
   final String? error;
 
   const ShopState({
@@ -19,11 +19,11 @@ class ShopLoading extends ShopState{
 }
 
 class ShopFulfillDone extends ShopState{
-  ShopFulfillDone(List<ProductEntity> products) : super(products: products);
+  ShopFulfillDone(List<ProductModel> products) : super(products: products);
 }
 
 class FindSingleProductById extends ShopState{
-  FindSingleProductById(ProductEntity product) : super(product: product);
+  FindSingleProductById(ProductModel product) : super(product: product);
 }
 
 class ShopError extends ShopState{

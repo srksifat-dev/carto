@@ -18,8 +18,8 @@ class ShopDataSource {
   Future<ProductModel?> getProductById({required String productId}) async {
     final response = await http.get(Uri.parse("$shopApiBaseUrl$products/$productId"));
     if (response.statusCode == 200) {
-      final dynamic jsonData = json.decode(response.body);
-      return jsonData.map((json) => ProductModel.fromMap(json));
+      final Map<String,dynamic> jsonData = json.decode(response.body);
+      return ProductModel.fromMap(jsonData);
     } else {
       throw Exception("Failed to load products");
     }

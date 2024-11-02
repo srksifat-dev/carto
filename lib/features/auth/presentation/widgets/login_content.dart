@@ -23,12 +23,12 @@ class LoginContent extends StatelessWidget {
               title: "Welcome Back",
               text: "Enter your Phone number or Email \naddress for sign in.",
             ),
-            SignInForm(),
+            const SignInForm(),
             const SizedBox(height: 16),
             Center(
                 child: Text("Or",
                     style:
-                        TextStyle(color: Color(0xFF010F07).withOpacity(0.7)))),
+                        TextStyle(color: const Color(0xFF010F07).withOpacity(0.7)))),
             const SizedBox(height: 16 * 1.5),
             Center(
               child: Text.rich(
@@ -41,7 +41,7 @@ class LoginContent extends StatelessWidget {
                   children: <TextSpan>[
                     TextSpan(
                       text: "Create new account.",
-                      style: const TextStyle(color: Color(0xFF22A45D)),
+                      style:  TextStyle(color: Theme.of(context).colorScheme.primary),
                       recognizer: TapGestureRecognizer()
                         ..onTap = goRegisterScreen,
                     )
@@ -76,7 +76,7 @@ class WelcomeText extends StatelessWidget {
               .copyWith(fontWeight: FontWeight.w600),
         ),
         const SizedBox(height: 16 / 2),
-        Text(text, style: TextStyle(color: Color(0xFF868686))),
+        Text(text, style: const TextStyle(color: Color(0xFF868686))),
         const SizedBox(height: 24),
       ],
     );
@@ -135,10 +135,10 @@ class _SignInFormState extends State<SignInForm> {
                 onSaved: (value) {},
                 decoration: InputDecoration(
                   hintText: "Password",
-                  border: UnderlineInputBorder(
+                  border: const UnderlineInputBorder(
                     borderSide: BorderSide(color: Color(0xFFF3F2F2)),
                   ),
-                  enabledBorder: UnderlineInputBorder(
+                  enabledBorder: const UnderlineInputBorder(
                     borderSide: BorderSide(color: Color(0xFFF3F2F2)),
                   ),
                   suffixIcon: GestureDetector(
@@ -180,14 +180,14 @@ class _SignInFormState extends State<SignInForm> {
                   }
                 },
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: const Color(0xFF22A45D),
+                  backgroundColor: Theme.of(context).colorScheme.primary,
                   foregroundColor: Colors.white,
                   minimumSize: const Size(double.infinity, 40),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(8),
                   ),
                 ),
-                child: Text("Sign in"),
+                child: const Text("Sign in"),
               ),
             ],
           ),

@@ -10,7 +10,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dio/dio.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get_it/get_it.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../features/auth/data/data_sources/firebase_auth_data_source.dart';
 import '../../features/auth/data/repositories/auth_repository_impl.dart';

@@ -8,7 +8,7 @@ String? userId;
 class GlobalBlocProviders {
   dynamic providers = [
     BlocProvider(create: (_) => di.sl<AuthCubit>()..checkAuth()),
-    BlocProvider(create: (_) => di.sl<ShopCubit>()..getProducts()),
+    BlocProvider(create: (_) => di.sl<ShopCubit>()),
     BlocProvider(create: (_) => di.sl<CartCubit>()..getAllCarts(userId: userId!)),
   ];
 }

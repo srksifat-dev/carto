@@ -1,4 +1,3 @@
-import 'package:carto/core/routes/routes.dart';
 import 'package:carto/core/utils/extensions/screen_size_extension.dart';
 import 'package:carto/core/utils/extensions/widget_extensions.dart';
 import 'package:carto/features/auth/presentation/widgets/login_content.dart';
@@ -53,7 +52,7 @@ class _AuthScreenState extends State<AuthScreen> {
               left: 0,
               right: 0,
               child: Container(
-                  decoration: BoxDecoration(
+                  decoration: const BoxDecoration(
                     color: Colors.white,
                     borderRadius: BorderRadius.only(
                       topRight: Radius.circular(32),
@@ -67,7 +66,7 @@ class _AuthScreenState extends State<AuthScreen> {
                       LoginContent(
                         goRegisterScreen: () {
                           pageController.nextPage(
-                            duration: Duration(milliseconds: 300),
+                            duration: const Duration(milliseconds: 300),
                             curve: Curves.linear,
                           );
                         },
@@ -75,7 +74,7 @@ class _AuthScreenState extends State<AuthScreen> {
                       RegisterContent(
                         goLoginScreen: () {
                           pageController.previousPage(
-                            duration: Duration(milliseconds: 300),
+                            duration: const Duration(milliseconds: 300),
                             curve: Curves.linear,
                           );
                         },

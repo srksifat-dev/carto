@@ -1,22 +1,24 @@
-import 'package:carto/features/cart/domain/entities/cart_entity.dart';
+import 'package:carto/features/cart/data/models/cart_model.dart';
 
 abstract class CartRepository {
   Future<void> addToCart({
-    required CartEntity cartItem,
+    required CartModel cartItem,
     required String userId,
   });
 
   Future<void> updatedQuantity({
     required String productId,
-    required int updatedQuantity,
+    required bool isIncrement,
     required String userId,
   });
-  Future<CartEntity?> getProductById({
+  Future<CartModel?> getProductById({
     required String productId,
     required String userId,
   });
 
-  Stream<List<CartEntity>> getAllCarts({
+  Future<List<CartModel>> getAllCarts({
     required String userId,
   });
+
+  Future<void> deleteCart({required String productId});
 }

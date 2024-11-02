@@ -1,8 +1,6 @@
 import 'package:carto/features/shop/data/models/rating_model.dart';
 
-import '../../domain/entities/product_entity.dart';
-
-class ProductModel extends ProductEntity {
+class ProductModel {
   num? id;
   String? title;
   num? price;

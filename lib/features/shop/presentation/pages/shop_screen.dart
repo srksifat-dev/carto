@@ -1,13 +1,13 @@
-import 'package:carto/core/routes/route_generator.dart';
+import 'package:carto/core/bloc/global_bloc_providers.dart';
 import 'package:carto/core/routes/routes.dart';
 import 'package:carto/core/utils/extensions/screen_size_extension.dart';
 import 'package:carto/core/utils/extensions/widget_extensions.dart';
 import 'package:carto/features/auth/presentation/cubits/auth_cubit.dart';
-import 'package:carto/features/cart/domain/entities/cart_entity.dart';
+import 'package:carto/features/cart/data/models/cart_model.dart';
 import 'package:carto/features/cart/presentation/cubits/cart_cubit.dart';
-import 'package:carto/features/shop/domain/entities/product_entity.dart';
+import 'package:carto/features/shop/data/models/product_model.dart';
 import 'package:carto/features/shop/presentation/cubits/shop_cubit.dart';
-import 'package:dartz/dartz.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -15,9 +15,22 @@ import 'package:uuid/uuid.dart';
 
 import '../cubits/shop_state.dart';
 
-class ShopScreen extends StatelessWidget {
+class ShopScreen extends StatefulWidget {
   const ShopScreen({super.key});
 
+  @override
+  State<ShopScreen> createState() => _ShopScreenState();
+}
+
+class _ShopScreenState extends State<ShopScreen> {
+  late final shopCubit = context.read<ShopCubit>();
+  late final cartCubit = context.read<CartCubit>();
+  @override
+  void initState() {
+    shopCubit.getProducts();
+    cartCubit.getAllCarts(userId: userId!);
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
     final cartCubit = context.read<CartCubit>();
@@ -39,7 +52,7 @@ class ShopScreen extends StatelessWidget {
             onPressed: () {
               context.pushNamed(Routes.cart);
             },
-            icon: Icon(
+            icon: const Icon(
               Icons.shopping_cart_checkout,
             ),
           ),
@@ -58,16 +71,16 @@ class ShopScreen extends StatelessWidget {
             );
           }
           if (state is ShopFulfillDone) {
-            List<ProductEntity> products = state.products!;
+            List<ProductModel> products = state.products!;
             return GridView.builder(
               itemCount: products.length,
-              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 2,
                   crossAxisSpacing: 16,
                   mainAxisSpacing: 16,
                   childAspectRatio: 0.7),
               itemBuilder: (context, index) => Container(
-                padding: EdgeInsets.symmetric(
+                padding: const EdgeInsets.symmetric(
                   horizontal: 8,
                   vertical: 12,
                 ),
@@ -82,7 +95,7 @@ class ShopScreen extends StatelessWidget {
                       height: context.screenHeight * 16,
                       child: Image.network(
                         products[index].image!,
-                        errorBuilder: (_, __, ___) => Icon(Icons.image),
+                        errorBuilder: (_, __, ___) => const Icon(Icons.image),
                         fit: BoxFit.cover,
                       ),
                     ),
@@ -113,7 +126,7 @@ class ShopScreen extends StatelessWidget {
                               ),
                               Row(
                                 children: [
-                                  Icon(
+                                  const Icon(
                                     Icons.star,
                                     color: Colors.amber,
                                   ),
@@ -133,12 +146,10 @@ class ShopScreen extends StatelessWidget {
                         child: InkWell(
                           onTap: () {
                             cartCubit.addToCart(
-                              cartItem: CartEntity(
-                                  id: Uuid().v4(),
-                                  productId: products[index].id!.toString(),
-                                  quantity: 1,
-                                  totalPrice:
-                                      products[index].price!.toDouble()),
+                              cartItem: CartModel(
+                                  id: const Uuid().v4(),
+                                  product: products[index],
+                                  quantity: 1,),
                               userId: userId,
                             );
                           },
@@ -149,7 +160,7 @@ class ShopScreen extends StatelessWidget {
                               borderRadius: BorderRadius.circular(8),
                               color: Theme.of(context).colorScheme.primary,
                             ),
-                            child: Center(
+                            child: const Center(
                               child: Icon(
                                 Icons.add_shopping_cart,
                                 color: Colors.white,

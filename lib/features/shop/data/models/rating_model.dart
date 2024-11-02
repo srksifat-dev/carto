@@ -1,8 +1,8 @@
-import 'package:carto/features/shop/domain/entities/rating_entity.dart';
 
-class RatingModel extends RatingEntity {
-
-  RatingModel({ super.rate, super.count});
+class RatingModel {
+  num? rate;
+  num? count;
+  RatingModel({ this.rate, this.count});
 
   RatingModel.fromMap(Map<String, dynamic> json) {
     rate = json['rate'];

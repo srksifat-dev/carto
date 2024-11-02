@@ -1,40 +1,41 @@
-import 'package:carto/features/cart/domain/entities/cart_entity.dart';
+import 'package:carto/features/shop/data/models/product_model.dart';
 
-class CartModel extends CartEntity{
+class CartModel{
   final String id;
-  final String productId;
-  final int quantity;
-  final double totalPrice;
+  final ProductModel product;
+  int quantity;
 
-  const CartModel({
+   CartModel({
     required this.id,
-    required this.productId,
+    required this.product,
     required this.quantity,
-    required this.totalPrice,
-  }):super(
-    id: id,
-    productId: productId,
-    quantity: quantity,
-    totalPrice: totalPrice,
-  );
+  });
 
   Map<String, dynamic> toMap() {
     return {
       'id': id,
-      'productId': productId,
+      'product': product.toMap(),
       'quantity': quantity,
-      'totalPrice': totalPrice,
     };
   }
 
   factory CartModel.fromMap(Map<String, dynamic> map) {
     return CartModel(
       id: map['id'] as String,
-      productId: map['productId'] as String,
+      product: ProductModel.fromMap(map["product"]),
       quantity: map['quantity'] as int,
-      totalPrice: map['totalPrice'] as double,
     );
   }
 
-
+  CartModel copyWith({
+    String? id,
+    ProductModel? product,
+    int? quantity,
+  }) {
+    return CartModel(
+      id: id ?? this.id,
+      product: product ?? this.product,
+      quantity: quantity ?? this.quantity,
+    );
+  }
 }

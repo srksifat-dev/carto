@@ -1,5 +1,5 @@
 import 'package:carto/core/base/resources/data_state.dart';
-import 'package:carto/features/shop/domain/entities/product_entity.dart';
+import 'package:carto/features/shop/data/models/product_model.dart';
 import 'package:carto/features/shop/domain/repositories/shop_repository.dart';
 import 'package:carto/features/shop/presentation/cubits/shop_state.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -24,7 +24,7 @@ class ShopCubit extends Cubit<ShopState>{
       emit(ShopError(error.toString()));
     }
   }
-  Future<ProductEntity?> getProductById({required String productId})async{
+  Future<ProductModel?> getProductById({required String productId})async{
     try{
       final shopDataState = await shopRepository.getProductById(productId: productId);
 
@@ -37,5 +37,6 @@ class ShopCubit extends Cubit<ShopState>{
     }catch(error){
       emit(ShopError(error.toString()));
     }
+    return null;
   }
 }

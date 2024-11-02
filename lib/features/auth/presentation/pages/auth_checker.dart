@@ -9,17 +9,19 @@ import '../../../shop/presentation/pages/shop_screen.dart';
 
 
 class AuthChecker extends StatelessWidget {
+  const AuthChecker({super.key});
+
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<AuthCubit,AuthState>(builder: (context,state){
       if(state is Unauthenticated){
-        return AuthScreen();
+        return const AuthScreen();
       }
       if(state is Authenticated){
-        return ShopScreen();
+        return const ShopScreen();
       }
       else{
-        return Scaffold(body: Center(
+        return const Scaffold(body: Center(
           child: CircularProgressIndicator(),
         ),);
       }

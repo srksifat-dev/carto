@@ -1,10 +1,6 @@
-import 'package:carto/features/cart/domain/entities/cart_entity.dart';
+import 'package:carto/features/cart/data/models/cart_model.dart';
 
 abstract class CartState{
-  final Stream<List<CartEntity>>? carts;
-  final String? error;
-
-  CartState({ this.carts,  this.error,});
 }
 
 class CartInitial extends CartState{
@@ -23,17 +19,20 @@ class CartUpdated extends CartState{
   CartUpdated();
 }
 
-class FindProduct extends CartState{
-  final CartEntity cart;
+class FindCart extends CartState{
+  final CartModel cart;
 
-  FindProduct(this.cart);
+  FindCart(this.cart);
 }
 
-class CartLoadedDone extends CartState{
-  CartLoadedDone(Stream<List<CartEntity>> carts) : super(carts: carts);
+class CartLoaded extends CartState{
+  final List<CartModel> carts;
+  final double totalAmount;
+  CartLoaded({required this.carts,required this.totalAmount,});
 }
 
 class CartError extends CartState{
-  CartError(String error) : super(error: error);
+  final String error;
+  CartError({required this.error});
 }
 
