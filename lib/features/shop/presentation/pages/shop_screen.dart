@@ -25,18 +25,19 @@ class ShopScreen extends StatefulWidget {
 class _ShopScreenState extends State<ShopScreen> {
   late final shopCubit = context.read<ShopCubit>();
   late final cartCubit = context.read<CartCubit>();
+
   @override
   void initState() {
     shopCubit.getProducts();
     cartCubit.getAllCarts(userId: userId!);
     super.initState();
   }
+
   @override
   Widget build(BuildContext context) {
     final cartCubit = context.read<CartCubit>();
     final authCubit = context.read<AuthCubit>();
     final userId = authCubit.currentUser!.id;
-
     return Scaffold(
       appBar: AppBar(
         title: Text(
@@ -57,6 +58,38 @@ class _ShopScreenState extends State<ShopScreen> {
             ),
           ),
         ],
+        leading: Builder(builder: (context) {
+          return IconButton(
+            icon: CircleAvatar(
+              child: Image.network(authCubit.currentUser!.avatarUrl, errorBuilder: (_,__,___)=> const Icon(Icons.person),),
+            ),
+            onPressed: () => Scaffold.of(context).openDrawer(),
+          );
+        }),
+      ),
+      drawer: Drawer(
+        child: Column(
+          children: [
+            DrawerHeader(
+              child: Image.network(authCubit.currentUser!.avatarUrl,errorBuilder: (_,__,___)=> const Icon(Icons.person,size: 80,),),
+            ),
+            ListTile(
+              onTap: (){
+                authCubit.logout();
+              },
+              leading: Text(
+                "Log Out",
+                style: TextStyle(
+                  color: Theme.of(context).colorScheme.error,
+                ),
+              ),
+              trailing: Icon(
+                Icons.logout,
+                color: Theme.of(context).colorScheme.error,
+              ),
+            ),
+          ],
+        ),
       ),
       body: BlocBuilder<ShopCubit, ShopState>(
         builder: (context, state) {
@@ -147,9 +180,10 @@ class _ShopScreenState extends State<ShopScreen> {
                           onTap: () {
                             cartCubit.addToCart(
                               cartItem: CartModel(
-                                  id: const Uuid().v4(),
-                                  product: products[index],
-                                  quantity: 1,),
+                                id: const Uuid().v4(),
+                                product: products[index],
+                                quantity: 1,
+                              ),
                               userId: userId,
                             );
                           },
