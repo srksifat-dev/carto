@@ -23,4 +23,15 @@ class ShopRepositoryImpl implements ShopRepository {
       return DataFailed(error.toString());
     }
   }
+  @override
+  Future<DataState<ProductModel>> getProductById({required String productId}) async {
+    try {
+      final httpResponse = await shopDataSource.getProductById(productId: productId);
+      print(httpResponse);
+      return DataSuccess(httpResponse!);
+    } catch (error) {
+      print(error);
+      return DataFailed(error.toString());
+    }
+  }
 }

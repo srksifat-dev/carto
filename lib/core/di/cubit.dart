@@ -5,4 +5,6 @@ Future<void> _initCubit()async{
   ));
   sl.registerFactory(() => ShopCubit(shopRepository: sl<ShopRepository>()
   ));
+  sl.registerFactory(() => CartCubit(cartRepository: sl<CartRepository>()
+  ));
 }

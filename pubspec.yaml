@@ -47,14 +47,13 @@ dependencies:
   firebase_storage: ^12.3.4
   dartz: ^0.10.1
   dio: ^5.7.0
-  retrofit: ^4.4.1
   http: ^1.2.2
+  fluttertoast: ^8.2.8
+  uuid: ^4.5.1
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  retrofit_generator: ^9.1.4
-  build_runner: ^2.4.13
 
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is

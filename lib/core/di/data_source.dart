@@ -6,5 +6,7 @@ Future<void> _initDataSources()async{
           () => FirebaseAuthDataSource(sl<FirebaseAuth>(), sl<FirebaseFirestore>()));
 sl.registerLazySingleton<ShopDataSource>(
           () => ShopDataSource());
+sl.registerLazySingleton<CartDataSource>(
+          () => CartDataSource(firebaseFirestore: sl<FirebaseFirestore>()));
 
 }

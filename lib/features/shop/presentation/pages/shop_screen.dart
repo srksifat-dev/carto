@@ -1,11 +1,17 @@
+import 'package:carto/core/routes/route_generator.dart';
+import 'package:carto/core/routes/routes.dart';
 import 'package:carto/core/utils/extensions/screen_size_extension.dart';
 import 'package:carto/core/utils/extensions/widget_extensions.dart';
 import 'package:carto/features/auth/presentation/cubits/auth_cubit.dart';
+import 'package:carto/features/cart/domain/entities/cart_entity.dart';
+import 'package:carto/features/cart/presentation/cubits/cart_cubit.dart';
 import 'package:carto/features/shop/domain/entities/product_entity.dart';
 import 'package:carto/features/shop/presentation/cubits/shop_cubit.dart';
 import 'package:dartz/dartz.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
+import 'package:uuid/uuid.dart';
 
 import '../cubits/shop_state.dart';
 
@@ -14,10 +20,30 @@ class ShopScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final cartCubit = context.read<CartCubit>();
+    final authCubit = context.read<AuthCubit>();
+    final userId = authCubit.currentUser!.id;
+
     return Scaffold(
       appBar: AppBar(
-        title: Text("CARTO",style: Theme.of(context).textTheme.titleLarge!.copyWith(fontWeight: FontWeight.bold,letterSpacing: 10,),),
+        title: Text(
+          "CARTO",
+          style: Theme.of(context).textTheme.titleLarge!.copyWith(
+                fontWeight: FontWeight.bold,
+                letterSpacing: 10,
+              ),
+        ),
         centerTitle: true,
+        actions: [
+          IconButton(
+            onPressed: () {
+              context.pushNamed(Routes.cart);
+            },
+            icon: Icon(
+              Icons.shopping_cart_checkout,
+            ),
+          ),
+        ],
       ),
       body: BlocBuilder<ShopCubit, ShopState>(
         builder: (context, state) {
@@ -105,7 +131,17 @@ class ShopScreen extends StatelessWidget {
                         top: 0,
                         right: 0,
                         child: InkWell(
-                          onTap: () {},
+                          onTap: () {
+                            cartCubit.addToCart(
+                              cartItem: CartEntity(
+                                  id: Uuid().v4(),
+                                  productId: products[index].id!.toString(),
+                                  quantity: 1,
+                                  totalPrice:
+                                      products[index].price!.toDouble()),
+                              userId: userId,
+                            );
+                          },
                           child: Container(
                             height: 40,
                             width: 40,

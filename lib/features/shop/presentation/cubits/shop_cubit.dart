@@ -24,4 +24,18 @@ class ShopCubit extends Cubit<ShopState>{
       emit(ShopError(error.toString()));
     }
   }
+  Future<ProductEntity?> getProductById({required String productId})async{
+    try{
+      final shopDataState = await shopRepository.getProductById(productId: productId);
+
+      if (shopDataState is DataSuccess){
+        emit(FindSingleProductById(shopDataState.data!));
+      }
+      if(shopDataState is DataFailed){
+        emit(ShopError(shopDataState.error!.toString()));
+      }
+    }catch(error){
+      emit(ShopError(error.toString()));
+    }
+  }
 }

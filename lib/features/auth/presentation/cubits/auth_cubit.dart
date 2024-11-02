@@ -1,8 +1,10 @@
+import 'package:carto/core/bloc/global_bloc_providers.dart';
 import 'package:carto/features/auth/data/models/user_model.dart';
 import 'package:carto/features/auth/domain/entities/user_entity.dart';
 import 'package:carto/features/auth/domain/repositories/auth_repository.dart';
 import 'package:carto/features/auth/presentation/cubits/auth_state.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class AuthCubit extends Cubit<AuthState> {
   final AuthRepository authRepository;
@@ -13,10 +15,12 @@ class AuthCubit extends Cubit<AuthState> {
   }) : super(AuthInitial());
 
   void checkAuth() async {
+
     final userdataState = await authRepository.getCurrentUser();
     final user = userdataState.data;
     if (user != null) {
       currentUser = user;
+      userId = currentUser!.id;
       emit(Authenticated(user));
     } else {
       emit(Unauthenticated());
